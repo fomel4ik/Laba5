@@ -10,7 +10,7 @@ namespace Laba5
             for (int i = 0; i < 10; i++)
             {
                 testList.Add(i * 2);
-                Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
+                Console.WriteLine($"Count: {testList.Length}, Capacity: {testList.Capacity}");
             }
 
             Console.WriteLine(testList[0]);
@@ -20,7 +20,7 @@ namespace Laba5
             {
                 Console.WriteLine(testList[999]);
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (IndexOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -35,9 +35,7 @@ namespace Laba5
             catch (ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
-
             }
-
             MyList<double> emptyList = new MyList<double>(0);
             try
             {
@@ -46,7 +44,46 @@ namespace Laba5
             catch (IndexOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
-
+            }
+            try
+            {
+                emptyList.Insert(0, 3.14);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                emptyList.Insert(emptyList.Length + 1, 2.71);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                emptyList.Insert(-1, 2.71);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                emptyList.RemoveAt(emptyList.Length-1);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                emptyList.RemoveAt(emptyList.Length);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }

@@ -5,7 +5,7 @@
         private T[] _data;
         private int _size;
         private const int defaultCapacity = 4;
-        public int Count => _size;
+        public int Length => _size;
         public int Capacity => _data.Length;
 
         //конструктор
@@ -56,6 +56,12 @@
                 throw new IndexOutOfRangeException("Индекс выходит за пределы массива");
         }
 
+        private void CheckIndexForInsert(int index)
+        {
+            if (index < 0 || index > _size)
+                throw new ArgumentOutOfRangeException(nameof(index));
+        }
+
         //Добавление элемента
         public void Add(T item)
         {
@@ -73,6 +79,7 @@
                 _data[i] = _data[i + 1];
             }
             _size--;
+            _data[_size] = default!;
         }
 
         //removes first item with value
@@ -91,7 +98,7 @@
         //insert item at index
         public void Insert(int index, T item)
         {
-            CheckIndexForAccess(index);
+            CheckIndexForInsert(index);
             if (_size == _data.Length) Grow();
 
             for (int i = _size; i > index; i--)
@@ -106,6 +113,7 @@
         //clears list
         public void Clear()
         {
+            Array.Clear(_data);
             _size = 0;
         }
     }
